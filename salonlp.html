@@ -1,0 +1,1030 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIEN - 東京の美容室</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Noto+Sans+JP:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #B76E79;
+            --dark: #2D2D2D;
+            --light-bg: #FFF8F6;
+            --white: #FFFFFF;
+            --gray: #777777;
+            --light-gray: #F5F5F5;
+            --border: #E8E8E8;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Noto Sans JP', sans-serif;
+            color: var(--dark);
+            line-height: 1.6;
+            background: var(--white);
+        }
+
+        /* Typography */
+        h1, h2, h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+
+        h1 {
+            font-size: 3.5rem;
+            letter-spacing: 2px;
+        }
+
+        h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        p {
+            font-size: 1rem;
+            color: var(--gray);
+        }
+
+        /* Navbar */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            letter-spacing: 3px;
+            color: var(--primary);
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 3rem;
+            list-style: none;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: var(--dark);
+            font-size: 0.95rem;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-menu a:hover {
+            color: var(--primary);
+        }
+
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 2.5px;
+            background: var(--dark);
+            margin: 5px 0;
+            transition: 0.3s;
+        }
+
+        /* Mobile Menu */
+        .nav-menu.active {
+            display: flex;
+            flex-direction: column;
+            position: absolute;
+            top: 70px;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            padding: 2rem;
+            gap: 1.5rem;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Hero Section */
+        #hero {
+            margin-top: 70px;
+            height: 100vh;
+            background: linear-gradient(135deg, #FFF8F6 0%, #FFF1ED 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            z-index: 10;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards;
+        }
+
+        .hero-tagline {
+            font-size: 0.9rem;
+            color: var(--primary);
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            font-weight: 500;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+            letter-spacing: 1px;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--gray);
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 0.9rem 2.5rem;
+            border: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            border-radius: 0;
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+
+        .btn-primary {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        .btn-primary:hover {
+            background: #a45a65;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--primary);
+            border: 2px solid var(--primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--primary);
+            color: var(--white);
+        }
+
+        /* Concept Section */
+        #concept {
+            padding: 6rem 2rem;
+            background: var(--white);
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: var(--primary);
+            font-size: 0.85rem;
+            letter-spacing: 2px;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .concept-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .concept-card {
+            text-align: center;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .concept-card.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .concept-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .card-title {
+            font-size: 1.3rem;
+            color: var(--dark);
+            margin-bottom: 0.8rem;
+            font-weight: 600;
+        }
+
+        .card-desc {
+            color: var(--gray);
+            line-height: 1.8;
+        }
+
+        /* Menu Section */
+        #menu {
+            padding: 6rem 2rem;
+            background: var(--light-bg);
+        }
+
+        .menu-container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .menu-item {
+            background: var(--white);
+            padding: 2rem;
+            border-left: 4px solid var(--primary);
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.6s ease;
+        }
+
+        .menu-item.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .menu-item:hover {
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .menu-name {
+            font-size: 1.1rem;
+            color: var(--dark);
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+        }
+
+        .menu-price {
+            font-size: 1.3rem;
+            color: var(--primary);
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 600;
+        }
+
+        .menu-desc {
+            font-size: 0.85rem;
+            color: var(--gray);
+            margin-top: 0.5rem;
+        }
+
+        /* Staff Section */
+        #staff {
+            padding: 6rem 2rem;
+            background: var(--white);
+        }
+
+        .staff-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .staff-card {
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.95);
+            transition: all 0.6s ease;
+        }
+
+        .staff-card.visible {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .staff-image {
+            width: 100%;
+            height: 300px;
+            background: linear-gradient(135deg, #FFF8F6, #FFF1ED);
+            border-radius: 8px;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .staff-name {
+            font-size: 1.2rem;
+            color: var(--dark);
+            margin-bottom: 0.3rem;
+        }
+
+        .staff-role {
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .staff-bio {
+            font-size: 0.9rem;
+            color: var(--gray);
+            line-height: 1.7;
+        }
+
+        /* Access Section */
+        #access {
+            padding: 6rem 2rem;
+            background: var(--light-bg);
+        }
+
+        .access-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .access-info {
+            opacity: 0;
+            transform: translateX(-20px);
+            transition: all 0.8s ease;
+        }
+
+        .access-info.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .access-item {
+            margin-bottom: 2rem;
+        }
+
+        .access-label {
+            font-size: 0.85rem;
+            color: var(--primary);
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin-bottom: 0.4rem;
+        }
+
+        .access-value {
+            font-size: 1.1rem;
+            color: var(--dark);
+            font-weight: 500;
+        }
+
+        .access-map {
+            background: #E8E8E8;
+            height: 350px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.8s ease;
+        }
+
+        .access-map.visible {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .map-placeholder {
+            text-align: center;
+            color: var(--gray);
+        }
+
+        .map-placeholder-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Reservation Section */
+        #reservation {
+            padding: 6rem 2rem;
+            background: var(--white);
+        }
+
+        .form-container {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 1.8rem;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease;
+        }
+
+        .form-group.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 600;
+            font-size: 0.95rem;
+            color: var(--dark);
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 0.9rem;
+            border: 1px solid var(--border);
+            border-radius: 0;
+            font-family: 'Noto Sans JP', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+
+        .form-group textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1rem;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: var(--primary);
+            color: var(--white);
+            border: none;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+        }
+
+        .submit-btn:hover {
+            background: #a45a65;
+            transform: translateY(-2px);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--dark);
+            color: var(--white);
+            padding: 3rem 2rem;
+            text-align: center;
+        }
+
+        .footer-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            letter-spacing: 2px;
+            color: var(--primary);
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            text-decoration: none;
+            color: var(--white);
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--primary);
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.6);
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            padding-top: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.2rem;
+            }
+
+            h2 {
+                font-size: 1.8rem;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+            }
+
+            .hamburger {
+                display: flex;
+            }
+
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(-45deg) translate(-8px, 8px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(45deg) translate(-7px, -7px);
+            }
+
+            .hero-title {
+                font-size: 2rem;
+            }
+
+            .hero-subtitle {
+                font-size: 0.95rem;
+            }
+
+            #concept, #menu, #staff, #access, #reservation {
+                padding: 4rem 1.5rem;
+            }
+
+            h2 {
+                margin-bottom: 1.5rem;
+            }
+
+            .concept-grid, .menu-grid, .staff-grid {
+                gap: 2rem;
+            }
+
+            .access-container {
+                grid-template-columns: 1fr;
+            }
+
+            .access-map {
+                height: 250px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+            }
+
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-logo {
+                font-size: 1.4rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+
+            h2 {
+                font-size: 1.4rem;
+            }
+
+            #concept, #menu, #staff, #access, #reservation {
+                padding: 3rem 1.2rem;
+            }
+
+            .concept-grid, .menu-grid, .staff-grid {
+                gap: 1.5rem;
+            }
+
+            .concept-card {
+                padding: 1.5rem;
+            }
+
+            .menu-item {
+                padding: 1.5rem;
+            }
+
+            .footer-links {
+                gap: 1rem;
+            }
+
+            nav {
+                padding: 0.8rem 1rem;
+            }
+
+            .nav-logo {
+                font-size: 1.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navbar -->
+    <nav>
+        <div class="nav-logo">LIEN</div>
+        <ul class="nav-menu">
+            <li><a href="#concept">コンセプト</a></li>
+            <li><a href="#menu">メニュー</a></li>
+            <li><a href="#staff">スタッフ</a></li>
+            <li><a href="#access">アクセス</a></li>
+            <li><a href="#reservation">予約</a></li>
+        </ul>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="hero">
+        <div class="hero-content">
+            <p class="hero-tagline">JIYUGAOKA HAIR SALON</p>
+            <h1 class="hero-title">LIEN</h1>
+            <p class="hero-subtitle">あなたらしさを、もっと美しく</p>
+            <div class="cta-buttons">
+                <button class="btn btn-primary" onclick="document.getElementById('reservation').scrollIntoView({behavior: 'smooth'})">予約する</button>
+                <button class="btn btn-secondary" onclick="document.getElementById('concept').scrollIntoView({behavior: 'smooth'})">詳しく見る</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Concept Section -->
+    <section id="concept">
+        <p class="section-subtitle">私たちのコンセプト</p>
+        <h2>質の高い美髪体験</h2>
+        <div class="concept-grid">
+            <div class="concept-card">
+                <div class="card-icon">✂️</div>
+                <h3 class="card-title">カット技術</h3>
+                <p class="card-desc">最新トレンドから定番スタイルまで、あなたの顔立ちに最適なカットをご提案。経験豊富なスタイリストが丁寧にお作りします。</p>
+            </div>
+            <div class="concept-card">
+                <div class="card-icon">🎨</div>
+                <h3 class="card-title">カラーリング</h3>
+                <p class="card-desc">ダメージを最小限に抑えた最新カラー技術。透明感のある色合いから大胆な変身まで、自由自在に表現できます。</p>
+            </div>
+            <div class="concept-card">
+                <div class="card-icon">💆</div>
+                <h3 class="card-title">ヘッドスパ</h3>
+                <p class="card-desc">頭皮をいたわるリラクシング体験。毛穴の汚れを落とし、髪の根元から健やかな美しさを引き出します。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu">
+        <div class="menu-container">
+            <p class="section-subtitle">メニュー & 料金</p>
+            <h2>すべてのメニュー</h2>
+            <div class="menu-grid">
+                <div class="menu-item">
+                    <div class="menu-name">カット</div>
+                    <div class="menu-price">¥5,500</div>
+                    <div class="menu-desc">プロによる丁寧なカット</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-name">カット+カラー</div>
+                    <div class="menu-price">¥11,000</div>
+                    <div class="menu-desc">カットとカラーのセット</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-name">カット+パーマ</div>
+                    <div class="menu-price">¥13,200</div>
+                    <div class="menu-desc">カットとパーマのセット</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-name">ヘッドスパ</div>
+                    <div class="menu-price">¥4,400</div>
+                    <div class="menu-desc">リラックス効果抜群</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-name">トリートメント</div>
+                    <div class="menu-price">¥3,300</div>
+                    <div class="menu-desc">髪のダメージ補修</div>
+                </div>
+                <div class="menu-item">
+                    <div class="menu-name">ブライダルセット</div>
+                    <div class="menu-price">¥16,500</div>
+                    <div class="menu-desc">特別な日のための完全プラン</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Staff Section -->
+    <section id="staff">
+        <p class="section-subtitle">スタッフ紹介</p>
+        <h2>経験豊富なプロフェッショナル</h2>
+        <div class="staff-grid">
+            <div class="staff-card">
+                <div class="staff-image">👩</div>
+                <div class="staff-name">佐藤美咲</div>
+                <div class="staff-role">Director / スタイリスト</div>
+                <p class="staff-bio">10年以上のキャリアを持つディレクター。トレンド分析と顧客のニーズを完璧に融合させた提案が得意。ブライダルメイクも担当。</p>
+            </div>
+            <div class="staff-card">
+                <div class="staff-image">👨</div>
+                <div class="staff-name">田中悠太</div>
+                <div class="staff-role">Stylist</div>
+                <p class="staff-bio">大型サロンでの経験を経てLIENに参画。メンズヘアから女性のショートスタイルまで幅広い技術を持つ。丁寧なカウンセリングが評判。</p>
+            </div>
+            <div class="staff-card">
+                <div class="staff-image">👩‍🦰</div>
+                <div class="staff-name">鈴木あかり</div>
+                <div class="staff-role">Colorist</div>
+                <p class="staff-bio">カラー技術のスペシャリスト。透明感のあるカラー表現で顧客から高い評価を得ている。ダメージケアにも定評あり。</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Access Section -->
+    <section id="access">
+        <h2 style="text-align: left;">アクセス</h2>
+        <div class="access-container">
+            <div class="access-info">
+                <div class="access-item">
+                    <div class="access-label">住所</div>
+                    <div class="access-value">東京都目黒区自由が丘2-8-15</div>
+                </div>
+                <div class="access-item">
+                    <div class="access-label">営業時間</div>
+                    <div class="access-value">10:00 - 20:00</div>
+                </div>
+                <div class="access-item">
+                    <div class="access-label">定休日</div>
+                    <div class="access-value">月曜日</div>
+                </div>
+                <div class="access-item">
+                    <div class="access-label">電話</div>
+                    <div class="access-value">03-XXXX-XXXX</div>
+                </div>
+                <div class="access-item">
+                    <div class="access-label">アクセス</div>
+                    <div class="access-value">自由が丘駅より徒歩3分</div>
+                </div>
+            </div>
+            <div class="access-map">
+                <div class="map-placeholder">
+                    <div class="map-placeholder-icon">🗺️</div>
+                    <p>Google Map</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section id="reservation">
+        <p class="section-subtitle">予約フォーム</p>
+        <h2>ご予約はこちらから</h2>
+        <div class="form-container">
+            <form id="reservationForm">
+                <div class="form-group">
+                    <label for="name">お名前 *</label>
+                    <input type="text" id="name" name="name" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">電話番号 *</label>
+                    <input type="tel" id="phone" name="phone" required>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="date">ご来店日 *</label>
+                        <input type="date" id="date" name="date" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="time">時間 *</label>
+                        <select id="time" name="time" required>
+                            <option value="">選択してください</option>
+                            <option value="10:00">10:00</option>
+                            <option value="10:30">10:30</option>
+                            <option value="11:00">11:00</option>
+                            <option value="11:30">11:30</option>
+                            <option value="12:00">12:00</option>
+                            <option value="12:30">12:30</option>
+                            <option value="13:00">13:00</option>
+                            <option value="13:30">13:30</option>
+                            <option value="14:00">14:00</option>
+                            <option value="14:30">14:30</option>
+                            <option value="15:00">15:00</option>
+                            <option value="15:30">15:30</option>
+                            <option value="16:00">16:00</option>
+                            <option value="16:30">16:30</option>
+                            <option value="17:00">17:00</option>
+                            <option value="17:30">17:30</option>
+                            <option value="18:00">18:00</option>
+                            <option value="18:30">18:30</option>
+                            <option value="19:00">19:00</option>
+                            <option value="19:30">19:30</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="menu">ご希望メニュー *</label>
+                    <select id="menu" name="menu" required>
+                        <option value="">選択してください</option>
+                        <option value="cut">カット ¥5,500</option>
+                        <option value="cut-color">カット+カラー ¥11,000</option>
+                        <option value="cut-perm">カット+パーマ ¥13,200</option>
+                        <option value="headspa">ヘッドスパ ¥4,400</option>
+                        <option value="treatment">トリートメント ¥3,300</option>
+                        <option value="bridal">ブライダルセット ¥16,500</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">ご要望・備考</label>
+                    <textarea id="notes" name="notes" placeholder="スタイリストへのご要望があればお書きください"></textarea>
+                </div>
+
+                <button type="submit" class="submit-btn">予約を確定する</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">LIEN</div>
+        <div class="footer-links">
+            <a href="#concept">コンセプト</a>
+            <a href="#menu">メニュー</a>
+            <a href="#staff">スタッフ</a>
+            <a href="#access">アクセス</a>
+            <a href="#reservation">予約</a>
+        </div>
+        <div class="footer-copyright">
+            &copy; 2026 LIEN. All rights reserved. | 東京都目黒区自由が丘
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        const hamburger = document.querySelector('.hamburger');
+        const navMenu = document.querySelector('.nav-menu');
+
+        hamburger.addEventListener('click', () => {
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when link clicked
+        document.querySelectorAll('.nav-menu a').forEach(link => {
+            link.addEventListener('click', () => {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Intersection Observer for scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, observerOptions);
+
+        // Observe all animated elements
+        document.querySelectorAll('.concept-card, .menu-item, .staff-card, .access-info, .access-map, .form-group').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Form submission
+        document.getElementById('reservationForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+
+            const formData = {
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                date: document.getElementById('date').value,
+                time: document.getElementById('time').value,
+                menu: document.getElementById('menu').value,
+                notes: document.getElementById('notes').value
+            };
+
+            console.log('Reservation submitted:', formData);
+
+            // Reset form
+            document.getElementById('reservationForm').reset();
+
+            // Show success message
+            alert('ご予約ありがとうございます！\n確認のご連絡をさせていただきます。');
+        });
+    </script>
+</body>
+</html>
